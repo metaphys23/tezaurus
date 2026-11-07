@@ -21,7 +21,13 @@
     ctx.beginPath(); ctx.moveTo(x2, y2); ctx.lineTo(x2 - ux * h - uy * h * 0.42, y2 - uy * h + ux * h * 0.42);
     ctx.lineTo(x2 - ux * h + uy * h * 0.42, y2 - uy * h - ux * h * 0.42); ctx.closePath(); ctx.fill();
     if (label) { ctx.font = 'italic 600 15px ' + css('--body'); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      const o = lab || [ux * 14, uy * 14]; ctx.fillText(label, x2 + o[0], y2 + o[1]); }
+      const o = lab || [ux * 14, uy * 14], lx = x2 + o[0], ly = y2 + o[1]; ctx.fillText(label, lx, ly);
+      // подпись вектора — со стрелкой над буквой (правило 07.11.2026); индекс в конце (₀…₉, ₙ, τ, кириллица) стрелкой не накрываем
+      if (/^[A-Za-zΔαβγδεθλμνπρστφψω]/.test(label)) {
+        const m = label.match(/^(.*?)([₀-₉ₐₑₒₓₙₘₖₗₚₛₜτ]+|[а-яё]+)?$/), base = (m && m[2] && m[1]) ? m[1] : label;
+        const wAll = ctx.measureText(label).width, wb = ctx.measureText(base).width, x0 = lx - wAll / 2 + (base[0] === 'Δ' ? ctx.measureText('Δ').width : 0) + 1, x1 = lx - wAll / 2 + wb + 1;
+        const ay = ly - 9.5, hh = 3; ctx.lineWidth = 1.3; ctx.beginPath(); ctx.moveTo(x0, ay); ctx.lineTo(x1 - 2, ay); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x1 + 1, ay); ctx.lineTo(x1 - 4, ay - hh); ctx.lineTo(x1 - 4, ay + hh); ctx.closePath(); ctx.fill(); } }
     ctx.restore();
   };
   SC.text = function(ctx, s, x, y, o){
