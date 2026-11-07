@@ -5,7 +5,7 @@
 Запуск: python3 build_tests_okr.py <корень сайта>"""
 import json, math, os, random, sys
 from fractions import Fraction as Fr
-ROOT = sys.argv[1] if len(sys.argv) > 1 else '/home/claude/fizika-trenazhery'
+ROOT = sys.argv[1] if len(sys.argv) > 1 else '/home/claude/tezaurus'
 rnd = random.Random(20261105)
 def c(x, d=2):                                   # число по-русски; нули срезаются только в дробной части
     if not isinstance(x, float): return str(x)

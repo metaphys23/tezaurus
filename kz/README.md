@@ -8,7 +8,7 @@
 | 8 | `kz/8-821dfa/` | `kz/8-821dfa/data.json` |
 | 9 | `kz/9-ac8433/` | `kz/9-ac8433/data.json` |
 
-Адрес: `https://metaphys23.github.io/fizika-trenazhery/kz/7-927feb/` (и так далее).
+Адрес: `https://metaphys23.github.io/tezaurus/kz/7-927feb/` (и так далее).
 
 ## Как устроено
 - `index.html` в папке класса одинаковый у всех; всё содержимое страница читает из `data.json` рядом с собой (`kz/class.js`, стиль `kz/class.css`).
